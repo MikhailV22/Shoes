@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        
+        <title>Shoes</title>
+        <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/images/favicon.ico"/>
+        <h:outputStylesheet name="/css/bootstrap.min.css"/>
+        <h:outputStylesheet name="/css/jsfcrud.css"/>
+        <h:outputStylesheet name="/css/cssLayout.css"/>
+        <h:outputStylesheet name="/css/default.css"/>
+        
+        <meta http-equiv="Cache-Control" content="no-cache"/>       
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    </h:head>
+    
+    <h:body>
+    <ui:insert name="metadata" />
+    
+    
+        <div id="page">
+            <div id="top">
+            <h:panelGroup id="cart" layout="block" class="cart">
+            	<div class="h-6 text-center">Корзина</div>
+	            <div class="h-6 text-center">#{cartController.getTotalCount()}шт</div>
+	            <div class="h-6 text-center">#{cartController.getTotalPrice()}руб.</div>
+            </h:panelGroup>
+            </div>
+                <div style="clear:both;"></div>                
+                
+                <ui:insert name="top_menu">
+					<ui:include src="topMenu.xhtml"></ui:include>
+                </ui:insert>
+                
+
+        
+        
+            <div id="left">
+                <ui:insert name="left">
+                </ui:insert>
+            </div>
+            <div id="right">
+                <ui:insert name="right">
+                </ui:insert>
+            </div>
+            <div id="content">
+                <ui:insert name="content">Content</ui:insert>
+            </div>
+        </div>
+<div style="clear:both;"></div>                
+        <div id="bottom">
+            <ui:insert name="bottom">
+                Shoes® - 2018 - 2018
+                <br/>
+                <h:form>
+            <div>        
+                    
+                <h:outputText
+                    style="font-size: 9px;"
+                    value="    
+            Текст, графические материалы, таблицы, фотографии и другая информация, размещенная на данном сайте, является собственностью Belron®, если не указано иное. Любое несанкционированное использование логотипов, торговых марок и другой интеллектуальной собственности Belron®,  строго запрещено и будет преследоваться по международному и российскому законодательству."/>
+            </div>        
+                </h:form>
+                
+            </ui:insert>
+
+            
+            
+            
+            
+        </div>
+
+    </h:body>
+
+</html>

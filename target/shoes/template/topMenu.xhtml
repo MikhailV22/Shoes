@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+  <ui:composition>
+<script>
+function myFunction() {
+    var x = document.getElementById("topmenu");
+    if (x.className === "topmenu") {
+        x.className += " responsive";
+    } else {
+        x.className = "topmenu";
+    }
+}
+</script>      
+      <style type="text/css">
+          
+.topmenu li.icon {
+  display: none;
+}
+.topmenu li {
+  display: inline-block;
+  padding:10px 20px;
+}
+
+@media screen and (max-width: 576px) {
+  .topmenu li:not(:first-child) {display: none;}
+  .topmenu{
+        min-width: 100%;
+        padding: 0px 5px;
+  }
+
+  .topmenu li {
+        float: none;
+        display: block;
+        text-align: left;
+  }
+
+  .topmenu li.active {
+        float: none;
+  }
+  
+  .topmenu .icon {
+        position: absolute;
+        right: 0px;
+        top: 0;
+  }
+  
+  
+  .topmenu li.icon {
+        float: right;
+        display: block;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .topmenu.responsive {position: absolute;
+        min-width: 100%;
+        background-color: white;
+        outline: 2px solid silver;
+        padding: 0px 5px;
+        padding-right: 5px;
+        z-index: 10;
+  }
+/*  .topmenu.responsive .icon {
+    position: absolute;
+    right: 0px;
+    top: 0;
+  }*/
+  .topmenu.responsive li {
+        float: none;
+        display: block;
+        text-align: left;
+  }
+  .topmenu.responsive .dropdown{
+        display: none;
+  }
+
+}          
+      </style>
+      
+                        <ul  class="topmenu">
+                            <li>
+								<h:link outcome="/index.xhtml" >
+								     <h:outputText value="Home"/>
+								</h:link>
+                            </li>
+
+                            <li>
+								<h:link outcome="/secured/prod/List.xhtml" >
+								     <h:outputText value="Prod List"/>
+								</h:link>
+                            </li>
+
+                            <li class="icon">
+                            <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+                            </li>
+                        </ul>
+
+  </ui:composition>
+</html>
+

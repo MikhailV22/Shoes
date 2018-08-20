@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+  <ui:composition>
+  
+    <div class="col-md-4 col-lg-3 item-container">
+    	<div class="item gender_#{item.prod.gender.id}" style="
+    		display:flex;
+    		flex-direction:column;
+    		justify-content:space-between;
+    		">
+    		<div>  
+			<div class="header gender_#{item.prod.gender.id}">#{item.prod.gender.name}</div>
+			<div class="content">
+			
+				<div>
+					<h:graphicImage url="/img/#{item.prod.pictures[0].picture}"> </h:graphicImage>
+				</div>
+
+				<div class="row">
+					<div class="col">
+						<ui:repeat value="#{item.prod.colors}" var="color">
+							<div class="color-box" style="background-color:#{color.code};"></div>
+						</ui:repeat>
+					</div>
+				</div>
+
+				<div>#{item.prod.id} артикул(#{item.prod.code})</div>
+				<div>#{item.prod.name}</div>
+				
+				<div>#{item.prod.trademark.name}</div>
+				<div>#{item.prod.prodtype.name}</div>
+				<div>#{item.prod.season.name}</div>
+				<div>#{item.prod.medicaltype.name}</div>
+
+					Размер
+			        <p:selectOneMenu id="selectsize"
+				        rendered="#{item.prod.warehouse.size() > 0}" 
+                        value="#{item.sizeId}" 
+                        style="box-sizing: content-box;">
+			               <f:selectItems value="#{item.prod.warehouse}" var="s" 
+			               		itemValue="#{s.size.id}" itemLabel="#{s.size.name}"/>
+			        </p:selectOneMenu>
+<ui:remove>
+</ui:remove>	        		
+			</div>
+			</div>
+			
+			<div class="footer gender_#{item.prod.gender.id}" 
+			style="">
+				
+				<ui:fragment rendered="#{item.prod.warehouse.size()!=0}">
+				<div>		
+					Количество <p:spinner id="amount" value="#{item.amount}" size="1" style="font-size:14pt;" class="mr-5" />
+					<h:outputText id="price" value="#{item.price} руб." style="font-size:16pt;float:right;"  />
+				</div>
+				<div>
+					<p:commandLink value="В корзину" 
+						action="#{cartController.add(item)}" 
+						onclick="PF('statusDialog').show();"
+						oncomplete="PF('statusDialog').hide();"
+						update="@form growl cart" 
+						class="add-cart mt-1"
+						 />
+				</div>
+				</ui:fragment>
+			</div>
+		</div>
+	</div>
+      
+
+  </ui:composition>
+</html>
+
+	

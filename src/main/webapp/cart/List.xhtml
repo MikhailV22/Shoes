@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
+
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                        template="/template/main.xhtml">
+            <ui:define name="content">
+    
+	<div><h1>Корзина</h1></div>
+
+	
+	<h:form >
+		<p:panel rendered="#{cartController.items.size()==0}" style="text-align:center;">
+			<h2>Корзина пуста</h2>
+		</p:panel>						 
+		<h:panelGroup rendered="#{cartController.items.size()!=0}">
+		<div class="container-fluid m-1">	
+			<div class="row align-items-center" style="border-bottom:1px solid gray;">
+				<div class="col">Наименование</div>
+				<div class="col">Размер</div>
+				<div class="col">Количество</div>
+				<div class="col">Цена</div>
+				<div class="col"></div>
+			</div>		
+		<ui:repeat  value="#{cartController.items}" var="item">
+			<div class="row align-items-center" style="border-bottom:1px solid gray;">
+				<div class="col">#{item.prod.name}</div>
+				<div class="col">#{item.size.name}</div>
+				<div class="col">
+					<p:spinner id="amount" value="#{item.amount}" size="1" min="1" max="100">
+						<p:ajax process="@this" 
+                                                listener="#{cartController.edit(item)}" 
+                                                update="@form cart" />  
+					</p:spinner>
+				</div>
+				<div class="col">#{item.price}</div>
+				<div class="col">
+					<p:commandButton value="Удалить" 
+						action="#{cartController.del(item)}" 
+						onclick="PF('statusDialog').show();"
+						oncomplete="PF('statusDialog').hide();"
+						update="@form cart" 
+						class="mt-1"/>
+				</div>
+			</div>
+		</ui:repeat>
+		</div>
+		
+		
+					<p:commandButton value="Заказать" 
+						action="#{cartController.confirmCart()}" 
+						onclick="PF('statusDialog').show();"
+						oncomplete="PF('statusDialog').hide();"
+						update="@form growl cart" 
+						 />
+	<p:panel header="Контакты">
+		<h:panelGrid columns="2">
+		<h:outputLabel>Город</h:outputLabel>
+		<p:inputText value="#{cartController.contact.city}" />
+		
+		<h:outputLabel>Улица</h:outputLabel>
+		<p:inputText value="#{cartController.contact.street}" />
+		
+		<h:outputLabel>Дом</h:outputLabel>
+		<p:inputText value="#{cartController.contact.house}" />
+		
+		<h:outputLabel>Квартира</h:outputLabel>
+		<p:inputText value="#{cartController.contact.flat}" />
+
+		<h:outputLabel>Комментарий</h:outputLabel>
+		<p:inputTextarea value="#{cartController.commentary}" cols="30" rows="5" >
+		</p:inputTextarea>
+		</h:panelGrid>
+	</p:panel>						 
+	</h:panelGroup>	
+	</h:form>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+
+</html>
+

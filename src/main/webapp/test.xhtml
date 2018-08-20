@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h:body>
+
+	test
+	<h:form id="searchPanel">  	
+			        <p:selectCheckboxMenu id="gender" value="#{searchParam.selectedGenders}"
+			        				multiple="true"  updateLabel="true"
+			                              filter="true" filterMatchMode="startsWith" panelStyle="max-width:250px"
+			                              style="max-width:250px"
+			                              
+			                              >
+			   			<f:selectItems value="#{genderController.items}"
+			   			 var="item" itemLabel="#{item.name}" itemValue="#{item.id.toString()}"/>
+			        </p:selectCheckboxMenu>        			
+	</h:form>
+    </h:body>
+
+</html>
+

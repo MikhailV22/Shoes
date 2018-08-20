@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
+
+	<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	                template="/template/main.xhtml">
+	    <ui:define name="content">
+
+	<div class="h1">Main list</div>
+
+
+	
+	<ui:include src="SearchPanel.xhtml"></ui:include>
+	<h:form id="result_list">
+		<div class="container-fluid m-1">	
+				<ui:repeat  value="#{searchResultController.items}" var="item">
+			<div class="row">
+					<div class="col-md-1">#{item.id}</div>
+					<div class="col-md-1">#{item.prod.name}</div>
+					<div class="col-md-1">#{item.prod.prodtype.name}</div>
+					<div class="col-md-1">#{item.sizeId}</div>
+					<div class="col-md-1">#{item.userId}</div>
+					<div class="col-md-1">#{item.amount}</div>
+					<div class="col-md-1">#{item.price}</div>
+			</div>
+				</ui:repeat>
+		</div>
+	</h:form>
+			   
+	    </ui:define>
+	</ui:composition>    
+
+
+</html>
+

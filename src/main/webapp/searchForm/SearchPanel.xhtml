@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+  <ui:composition>
+            <style type="text/css">
+            	.search_panel{
+					display:flex;
+					flex-wrap:wrap;
+					justify-content:space-between;
+					border:0px solid red;
+					margin:5px 0px;
+                }
+                .ui-selectcheckboxmenu-multiple, .ui-selectonemenu,.ui-selectonemenu,.ui-state-default
+                {
+                	box-sizing: content-box;
+                }
+			</style>
+  
+	<p:panel header="Параметры поиска">
+	<h:form id="searchPanel">  
+	<div class="search_panel">
+				<div class="">
+					<div class="h6">Пол</div>
+			        <p:selectCheckboxMenu id="gender" value="#{searchParam.selectedGenders}"
+			        				multiple="true"  updateLabel="true"
+			                              filter="false" filterMatchMode="startsWith"
+			                              style="max-width:250px"
+			                              onchange="document.getElementById('searchPanel:btnSearch').click()"
+			                              >
+			   			<f:selectItems value="#{genderController.items}"
+			   			 var="item" itemLabel="#{item.name}" itemValue="#{item.id.toString()}"/>
+			        </p:selectCheckboxMenu>        			
+				</div>  
+				<div class="">
+					<div class="h6">Тип</div>
+			        <p:selectCheckboxMenu id="prodtype" value="#{searchParam.selectedProdtypes}"
+			        				multiple="true"  updateLabel="true"
+			                              filter="false" filterMatchMode="startsWith"
+			                               
+			                              panelStyle="max-width:350px;"
+			                              style="max-width:250px;box-sizing: content-box;"
+			                              
+			                              >
+			   			<f:selectItems value="#{prodtypeController.items}"
+			   			 var="item" itemLabel="#{item.name}" itemValue="#{item.id.toString()}"/>
+			        </p:selectCheckboxMenu>        			
+				</div>  
+				<div class="">
+					<div class="h6">Размер</div>
+			        <p:selectCheckboxMenu id="sizes" 
+			        				value="#{searchParam.selectedSizes}"
+			        				multiple="true"  updateLabel="true"
+			                              filter="false" filterMatchMode="startsWith"
+			                              style="max-width:250px"
+			                              >
+               			<f:selectItems value="#{sizeController.items}" 
+               			var="item" itemValue="#{item.id.toString()}" itemLabel="#{item.name}"
+               			/>
+			        </p:selectCheckboxMenu>        			
+        			
+				</div>  
+				<div class="">
+					<div class="h6">Сезон</div>
+			        <p:selectCheckboxMenu id="season" value="#{searchParam.selectedSeason}"
+			        				multiple="true"  updateLabel="true"
+			                              filter="false" filterMatchMode="startsWith"
+			                              style="max-width:250px"
+			                              >
+			   			<f:selectItems value="#{seasonController.items}"
+			   			 var="item" itemLabel="#{item.name}" itemValue="#{item.id.toString()}"/>
+			        </p:selectCheckboxMenu>        			
+				</div>  
+				<div class="">
+					<div class="h6">Предназначение</div>
+			        <p:selectCheckboxMenu id="medicaltype" 
+			        				value="#{searchParam.selectedMedicaltype}"
+			        				multiple="true"  updateLabel="true"
+			                              filter="false" filterMatchMode="startsWith"
+			                              style="max-width:250px"
+			                              >
+               			<f:selectItems value="#{medicaltypeController.items}" 
+               			var="item" itemLabel="#{item.name}" itemValue="#{item.id.toString()}"/>
+			        </p:selectCheckboxMenu>        			
+				</div>  
+				<div class="">
+					<div class="h6">Цвет</div>
+			        <p:selectCheckboxMenu id="colors" 
+			        				value="#{searchParam.selectedColors}"
+			        				multiple="true"  updateLabel="true"
+			                              filter="false" filterMatchMode="startsWith"
+			                              style="max-width:250px"
+			                              >
+               			<f:selectItems value="#{colorController.items}" 
+               			var="item" itemValue="#{item.id.toString()}" itemLabel="#{item.name}"
+               			/>
+			        </p:selectCheckboxMenu>        			
+				</div>  
+	</div>
+	<div class="" style="text-align:right;">
+		<p:commandButton value="Искать"
+		id="btnSearch" 
+		action="#{searchResultController.find()}"
+		process="@form" 
+		update="result_list" 
+		onclick="PF('statusDialog').show();"
+		oncomplete="PF('statusDialog').hide();"
+		style="height:25px;padding:0px;font-size:14px;" />
+	</div>
+	</h:form>
+	</p:panel>
+  </ui:composition>
+</html>
+
+	

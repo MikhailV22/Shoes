@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
+
+   <ui:composition>
+
+
+            <style type="text/css">
+.ui-growl {
+    right: 20px;
+    top: 80%;
+}
+                
+                
+                
+			</style>
+   
+   
+	<div><h1>Каталог детской обуви</h1></div>
+
+	<ui:include src="SearchPanel.xhtml"></ui:include>
+	<h:form id="result_list">
+	Найдено: #{searchResultController.items.size()} позиций
+		<div class="container-fluid m-1" style="padding:0px;">	
+			<div class="row">
+				<ui:repeat  value="#{searchResultController.items}" var="item">
+					<ui:include src="Item.xhtml"></ui:include>
+				</ui:repeat>
+			</div>
+		</div>
+	</h:form>
+
+   </ui:composition>
+</html>
+

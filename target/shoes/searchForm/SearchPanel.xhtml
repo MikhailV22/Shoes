@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+  <ui:composition>
+	<h:form id="searchPanel">  
+	<div class="search_panel">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-2">
+					<div class="h6">Тип</div>
+			        <p:selectManyMenu id="prodtype"  showCheckbox="true"
+                            		value="#{searchParam.selectedProdtypes}" 
+                            		onchange="document.getElementById('searchPanel:btnSearch').click()">
+               			<f:selectItems value="#{prodtypeController.getItemsAvailableSelectMany()}"/>
+        			</p:selectManyMenu>
+				</div>  
+				<div class="col-md-2">
+					<div class="h6">Пол</div>
+			        <p:selectManyMenu id="gender"  showCheckbox="true"
+                            		value="#{searchParam.selectedGenders}" 
+                            		onchange="document.getElementById('searchPanel:btnSearch').click()">
+                            		>
+               			<f:selectItems value="#{genderController.getItemsAvailableSelectMany()}"/>
+        			</p:selectManyMenu>
+				</div>  
+				<div class="col-md-2">
+					<div class="h6">Сезон</div>
+			        <p:selectManyMenu id="season"  showCheckbox="true"
+                            		value="#{searchParam.selectedSeason}" 
+                            		onchange="document.getElementById('searchPanel:btnSearch').click()">
+                            		>
+               			<f:selectItems value="#{seasonController.getItemsAvailableSelectMany()}"/>
+        			</p:selectManyMenu>
+				</div>  
+				<div class="col-md-3">
+					<div class="h6">Предназначение</div>
+			        <p:selectManyMenu id="medicaltype"  showCheckbox="true" style="width:200px;"
+                            		value="#{searchParam.selectedMedicaltype}" 
+                            		onchange="document.getElementById('searchPanel:btnSearch').click()">
+                            		>
+               			<f:selectItems value="#{medicaltypeController.getItemsAvailableSelectMany()}"/>
+        			</p:selectManyMenu>
+				</div>  
+				<div class="col-md-auto">
+					<p:commandButton value="Искать"
+					id="btnSearch" 
+					action="#{searchResultController.find()}"
+					process="@form" 
+					update="result_list" 
+					onclick="PF('statusDialog').show();"
+					oncomplete="PF('statusDialog').hide();"
+					style="height:25px;padding:0px;font-size:14px;" />
+				</div>
+			</div>  
+		</div>  
+	</div>
+	</h:form>
+  </ui:composition>
+</html>
+
+	

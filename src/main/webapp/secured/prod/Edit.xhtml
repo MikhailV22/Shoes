@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
+
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                        template="/template/main.xhtml">
+            <ui:define name="content">
+    
+<div class="h1">Create Prods</div>
+<h:form id="mainForm">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+	<h:panelGrid columns="2" style="width:90%">
+<ui:remove>	
+		<h:outputLabel for="id">Id</h:outputLabel>
+		<p:inputText id="id" value="#{prodController.current.id}"></p:inputText>
+</ui:remove>
+
+		<h:outputLabel for="name">Name</h:outputLabel>
+		<p:inputText id="name" value="#{prodController.current.name}"></p:inputText>		
+
+		<h:outputLabel for="code">code</h:outputLabel>
+		<p:inputText id="code" value="#{prodController.current.code}"></p:inputText>
+		
+		<h:outputLabel for="prodtype1">Тип товара</h:outputLabel>
+		<h:panelGroup layout="block">
+        <h:selectOneMenu id="prodtype1" 
+                            value="#{prodController.current.prodtype.id}" >
+               <f:selectItems value="#{prodtypeController.getItemsAvailableSelectOne()}"/>
+        </h:selectOneMenu>
+        <p:message for="prodtype1" style="display: inline;" />
+        </h:panelGroup>
+
+		<h:outputLabel for="trademark">Trademark</h:outputLabel>
+         <h:selectOneMenu id="trademark" 
+                            value="#{prodController.current.trademark.id}" >
+               <f:selectItems value="#{trademarkController.getItemsAvailableSelectOne()}"/>
+         </h:selectOneMenu>
+
+		<h:outputLabel for="gender">Gender</h:outputLabel>
+         <h:selectOneMenu id="gender" 
+                            value="#{prodController.current.gender.id}" >
+               <f:selectItems value="#{genderController.getItemsAvailableSelectOne()}"/>
+         </h:selectOneMenu>
+
+		<h:outputLabel for="medicaltype">Medicaltype</h:outputLabel>
+         <h:selectOneMenu id="medicaltype" 
+         required="false"
+         converter="#{medicaltypeConverter}"
+         
+                            value="#{prodController.current.medicaltype}" >
+               <f:selectItems value="#{medicaltypeController.getItemsAvailableSelectOne()}"
+               var="item" itemValue="#{item}" itemLabel="#{item.name}"/>
+         </h:selectOneMenu>
+		
+		<h:outputLabel for="season">Season</h:outputLabel>
+         <h:selectOneMenu id="season" 
+                            value="#{prodController.current.season.id}" >
+               <f:selectItems value="#{seasonController.getItemsAvailableSelectOne()}"/>
+         </h:selectOneMenu>
+	</h:panelGrid>
+			<p:panel header="Размеры" style="max-width:250px;">
+			        <p:selectManyMenu id="sizes"  showCheckbox="true"
+			        	rendered="true"
+			        
+			        		converter="#{sizeConverter}"
+                            		value="#{prodController.current.sizes}"> 
+               			<f:selectItems value="#{sizeController.getItemsAvailableSelectMany()}"/>
+        			</p:selectManyMenu>
+        	</p:panel>		
+			<p:panel header="Основные цвета" style="max-width:250px;">
+			        <p:selectManyMenu id="color"  showCheckbox="true"
+			        	rendered="true"
+			        
+			        		converter="#{colorConverter}"
+                            		value="#{prodController.current.colors}"> 
+               			<f:selectItems value="#{colorController.getItemsAvailableSelectMany()}"/>
+        			</p:selectManyMenu>
+        	</p:panel>		
+
+			<p:panel header="Изображения">
+		        <ui:repeat id="pictures"  value="#{prodController.current.pictures}" var="pic">
+					<h:graphicImage url="/img/#{pic.picture}"> </h:graphicImage>
+       			</ui:repeat>
+        	</p:panel>		
+
+	<p:commandLink value="Save" action="#{prodController.Edit}"  process="@form" update="@form messagePanel" class="mr-3"/>
+    <h:link outcome="List.xhtml" >Cancel</h:link>
+    <br/>   
+
+</h:form>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+
+</html>
+

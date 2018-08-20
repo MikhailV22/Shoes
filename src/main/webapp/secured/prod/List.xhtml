@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
+
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                        template="/template/main.xhtml">
+            <ui:define name="content">
+    
+<div class="h1">List of Prods</div>
+
+<br/>
+<h:form>
+
+<p:commandButton value="Add" action="#{prodController.prepareAdd}" />
+<p:commandButton value="Refresh" action="#{prodController.refreshList()}" update="@form"/>
+<br/>
+
+<ui:repeat  value="#{prodController.items}" var="item">
+	<div class="container m-2 ">	
+		<div class="row" style="border-bottom:1px solid gray; height:170px;">
+		
+			
+			<div class="col-md-3">
+			(#{item.id})
+			{#{item.code}}
+			#{item.name}
+			</div>
+			
+			<div class="col-md-2">
+				#{item.prodtype.name}
+				<div>#{item.trademark.name}</div>
+				<div>#{item.medicaltype.name}</div>
+				<div>#{item.season.name}</div>
+			</div>
+			
+			<div class="col-md-2" style="position:relative">
+			
+								<h:graphicImage url="/img/#{item.pictures[0].picture}" 
+								width="70"
+								style="position: relative;top:-10px; border:0px solid red;"
+								> </h:graphicImage>
+				<div>
+					<ui:repeat value="#{item.colors}" var="color">
+							<div class="color-box" style="background-color:#{color.code};"></div>
+					</ui:repeat>
+				</div>
+				<div>
+					<ui:repeat value="#{item.sizes}" var="item">
+							<div style="display:inline-block; margin-right:5px;">#{item.name}</div>
+					</ui:repeat>
+				</div>
+			</div>
+			<div class="col-md-2">
+			
+				<p:commandButton value="Edit" action="#{prodController.prepareEdit(item)}"  style="height:25px;padding:0px;font-size:14px;" />
+				<p:commandButton value="Del" action="#{prodController.del(item)}" update="@form" style="height:25px;padding:0px;font-size:14px;" />
+			</div>
+		</div>
+	</div>
+
+<br/>
+</ui:repeat>
+</h:form>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+
+</html>
+

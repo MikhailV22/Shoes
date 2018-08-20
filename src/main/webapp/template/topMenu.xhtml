@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+  <ui:composition>
+<script>
+function myFunction() {
+    var x = document.getElementById("topmenu");
+    if (x.className === "topmenu") {
+        x.className += " responsive";
+    } else {
+        x.className = "topmenu";
+    }
+}
+</script>      
+      <style type="text/css">
+   		.topmenu a{
+   			background-color:#cce6ff;
+   			border-radius:5px;
+   			padding:10px;
+   			line-height: 30px;
+   			height:50px;
+   			border:1px solid #0080ff;
+   			text-decoration : none;
+   			font-size:14pt;
+   			font-family: 'Open Sans', arial;
+   			color:#004080;
+   		}
+      
+      
+		.topmenu{
+		  display: inline-block;
+		  padding:0px;
+		  border: 0px solid gray;
+		  /*height:50px;*/
+		}          
+		.topmenu li.icon {
+		  display: none;
+		}
+		.topmenu li {
+		  display: inline-block;
+		  padding:5px 0px;
+		  border: 0px solid blue;
+		  /*background-color:silver;*/
+		}
+
+@media screen and (max-width: 576px) {
+  .topmenu li:not(:first-child) {display: none;}
+  .topmenu{
+        min-width: 100%;
+        padding: 0px 5px;
+  }
+
+  .topmenu li {
+        float: none;
+        display: block;
+        text-align: left;
+  }
+
+  .topmenu li.active {
+        float: none;
+  }
+  
+  .topmenu .icon {
+        position: absolute;
+        right: 0px;
+        top: 0;
+  }
+  
+  
+  .topmenu li.icon {
+        float: right;
+        display: block;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .topmenu.responsive {position: absolute;
+        min-width: 100%;
+        background-color: white;
+        outline: 2px solid silver;
+        padding: 0px 5px;
+        padding-right: 5px;
+        z-index: 10;
+  }
+/*  .topmenu.responsive .icon {
+    position: absolute;
+    right: 0px;
+    top: 0;
+  }*/
+  .topmenu.responsive li {
+        float: none;
+        display: block;
+        text-align: left;
+  }
+  .topmenu.responsive .dropdown{
+        display: none;
+  }
+
+}          
+      </style>
+      
+                        <ul id="topmenu" class="topmenu">
+                            <li>
+								<h:link outcome="/index.xhtml" >
+								     <h:outputText value="Каталог"/>
+								</h:link>
+                            </li>
+
+                            <li>
+								<h:link outcome="/secured/prod/List.xhtml" >
+								     <h:outputText value="Редактирование каталога"/>
+								</h:link>
+                            </li>
+
+                            <li>
+								<h:link outcome="/delivery/delivery.xhtml" >
+								     <h:outputText value="Доставка и оплата"/>
+								</h:link>
+                            </li>
+
+                            <li>
+								<h:link outcome="/contact/contact.xhtml" >
+								     <h:outputText value="Контакты"/>
+								</h:link>
+                            </li>
+
+                            <li class="icon">
+                            <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+                            </li>
+                        </ul>
+
+  </ui:composition>
+</html>
+

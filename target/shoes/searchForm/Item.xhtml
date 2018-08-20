@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+  <ui:composition>
+    <div class="col-md-4 col-lg-3 item-container">
+    	<div class="item">  
+			<div class="header gender_#{item.prod.gender.id}">#{item.prod.gender.name}</div>
+			<div class="content">
+				<div>#{item.prod.id} артикул(#{item.prod.code})</div>
+				<div>#{item.prod.name}</div>
+				
+				<div>#{item.prod.trademark.name}</div>
+				<div>#{item.prod.prodtype.name}</div>
+				<div>#{item.prod.season.name}</div>
+				<div>#{item.prod.medicaltype.name}</div>
+<ui:remove>
+				<div>#{item.prod.colors.size()}</div>
+				Наличие
+				<div class="row">
+        <h:selectOneMenu id="selectsize" 
+                            value="#{prodController.selectedSize}" >
+               <f:selectItems value="#{item.prod.warehouse}" var="size" itemValue="#{size}" itemLabel="#{size.size.name}"/>
+        </h:selectOneMenu>
+				</div>				
+</ui:remove>				
+				<div class="row">
+					
+					<ui:repeat value="#{item.prod.warehouse}" var="warehouse">
+						<div class="col-md-6">#{warehouse.whouseId}</div>
+						<div class="col-md-6">#{warehouse.size.id}</div>
+					</ui:repeat>
+				</div>
+<ui:remove>
+				onStock
+				<div class="row">
+					<ui:repeat value="#{warehouseController.findByWhouseId(item.prod.id,1)}" var="warehouse2">
+						<div class="col-md-6">#{warehouse2.whouseId}</div>
+						<div class="col-md-6">#{warehouse2.sizeId}</div>
+					</ui:repeat>
+				</div>
+</ui:remove>
+				<ui:fragment rendered="#{item.prod.warehouse.size()!=0}">
+				<div>
+					
+					<p:spinner id="amount" value="#{item.amount}" size="3" style="font-size:12pt;" class="mr-3" />
+					<h:outputText id="price" value="#{item.price} руб." size="3" style="font-size:12pt;" class="mr-3" />
+					<p:commandButton value="В корзину" 
+						action="#{cartController.add(item)}" 
+						onclick="PF('statusDialog').show();"
+						oncomplete="PF('statusDialog').hide();"
+						update="@form growl cart" style="height:25px;padding:0px;font-size:14px;" />
+					
+				</div>
+				</ui:fragment>
+			</div>
+		</div>
+	</div>
+      
+
+  </ui:composition>
+</html>
+
+	
