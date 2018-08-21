@@ -57,7 +57,7 @@
 		
 		
 					<p:commandButton value="Заказать" 
-						action="#{orderProcessor.confirmCart()}" 
+						action="#{cartController.confirmCart()}" 
 						onclick="PF('statusDialog').show();"
 						oncomplete="PF('statusDialog').hide();"
 						update="@form growl cart" 
@@ -65,19 +65,19 @@
 	<p:panel header="Контакты">
 		<h:panelGrid columns="2">
 		<h:outputLabel>Город</h:outputLabel>
-		<p:inputText value="#{orderProcessor.contact.city}" />
+		<p:inputText value="#{cartController.contact.city}" />
 		
 		<h:outputLabel>Улица</h:outputLabel>
-		<p:inputText value="#{orderProcessor.contact.street}" />
+		<p:inputText value="#{cartController.contact.street}" />
 		
 		<h:outputLabel>Дом</h:outputLabel>
-		<p:inputText value="#{orderProcessor.contact.house}" />
+		<p:inputText value="#{cartController.contact.house}" />
 		
 		<h:outputLabel>Квартира</h:outputLabel>
-		<p:inputText value="#{orderProcessor.contact.flat}" />
+		<p:inputText value="#{cartController.contact.flat}" />
 
 		<h:outputLabel>Комментарий</h:outputLabel>
-		<p:inputTextarea value="#{orderProcessor.commentary}" cols="30" rows="5" >
+		<p:inputTextarea value="#{cartController.commentary}" cols="30" rows="5" >
 		</p:inputTextarea>
 		</h:panelGrid>
 	</p:panel>						 

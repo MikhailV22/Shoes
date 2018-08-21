@@ -5,7 +5,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import javax.inject.Named;
 
-import EJB.OrderEJB;
+import EJB.DefaultOrderService;
 
 
 @Named("orderController")
@@ -13,12 +13,12 @@ import EJB.OrderEJB;
 public class OrderController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@EJB
-	private OrderEJB orderEJB;
-	public OrderEJB getOrderEJB() {
-		return orderEJB;
+	private DefaultOrderService orderProcessor;
+	public DefaultOrderService getOrderProcessor() {
+		return orderProcessor;
 	}
-	public void setOrderEJB(OrderEJB orderEJB) {
-		this.orderEJB = orderEJB;
+	public void setOrderProcessor(DefaultOrderService orderProcessor) {
+		this.orderProcessor = orderProcessor;
 	}
 	
 	

@@ -15,9 +15,9 @@
                         template="/template/main.xhtml">
             <ui:define name="content">
     
-				<div><h1>Заказ №#{orderProcessor.order.orignum} на #{orderProcessor.order.summa} рублей.</h1></div>
+				<div><h1>Заказ №#{cartController.order.orignum} на #{cartController.order.summa} рублей.</h1></div>
 				<div><h1>Спасибо за заказ</h1></div>
-				
+				#{orderController.orderProcessor.order.summa}
 
             </ui:define>
         </ui:composition>

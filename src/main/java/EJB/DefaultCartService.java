@@ -1,19 +1,22 @@
-package SessionBean;
+package EJB;
 
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import JSF.UserController;
+import SessionBean.CartFacade;
+import SessionBean.SizeFacade;
 import model.Cart;
 import model.SearchResult;
 
-@Stateful
-public class CartEJB {
+//@Stateful
+@Stateless
+public class DefaultCartService {
 	private Cart current;
 	private List<Cart> items;
 

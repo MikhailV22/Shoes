@@ -14,7 +14,7 @@ import model.Order;
 //import model.Orderdetail;
 
 @Stateful
-public class OrderEJB {
+public class DefaultOrderService {
 	
 	@EJB
 	private OrderFacade orderFacade;
