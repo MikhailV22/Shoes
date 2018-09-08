@@ -99,6 +99,42 @@
     <br/>   
 
 </h:form>
+<h:form>
+	<p:panel header="Наличие" style="max-width:250px;">
+	<h:dataTable value="#{warehouseController.findByWhouseId(prodController.current.id,1)}"
+		var="item">
+		<h:column>
+			<f:facet name="header">
+		        <h:outputText value="ID" />
+		    </f:facet>		
+			#{item.id}
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+		        <h:outputText value="SIZE" />
+		    </f:facet>		
+			        <p:selectOneMenu id="sizes"  showCheckbox="true"
+			        	rendered="true"
+			        
+			        		converter="#{sizeConverter}"
+                            		value="#{item.size}"> 
+               			<f:selectItems value="#{sizeController.getItemsAvailableSelectMany()}"/>
+        			</p:selectOneMenu>
+			
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+		        <h:outputText value="AMOUNT" />
+		    </f:facet>
+		    <p:inputText value="#{item.amount}"></p:inputText>		
+		</h:column>
+		<h:column>
+			<p:commandLink value="Save" action="#{warehouseController.edit(item)}" process="@form" update="@form"/>
+		</h:column>
+		
+	</h:dataTable>
+   	</p:panel>		
+</h:form>
 
             </ui:define>
         </ui:composition>

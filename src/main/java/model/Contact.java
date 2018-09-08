@@ -27,6 +27,9 @@ public class Contact implements Serializable {
 
 	private String street;
 
+	@Column(name="PHONE")
+	private String phone;
+
 	@Column(name="USER_ID")
 	private String userId;
 
@@ -80,5 +83,37 @@ public class Contact implements Serializable {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Contact other = (Contact) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+	
+	
 
 }

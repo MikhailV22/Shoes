@@ -3,7 +3,7 @@ package EJB;
 import java.util.Date;
 
 import javax.ejb.EJB;
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 
 //import SessionBean.CartEJB;
 //import SessionBean.ContactFacade;
@@ -13,7 +13,7 @@ import SessionBean.OrderFacade;
 import model.Order;
 //import model.Orderdetail;
 
-@Stateful
+@Stateless
 public class DefaultOrderService {
 	
 	@EJB

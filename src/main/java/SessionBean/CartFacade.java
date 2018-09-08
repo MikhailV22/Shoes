@@ -1,11 +1,14 @@
 package SessionBean;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import model.Cart;
+import model.Prod;
 import model.SearchResult;
 
 import javax.persistence.EntityManager;
@@ -18,7 +21,8 @@ import JSF.UserController;
  */
 @Stateless
 public class CartFacade extends AbstractFacade<Cart> {
-
+	
+	Logger logger = Logger.getLogger(CartFacade.class.getName());
 	@Inject
 	UserController userController;
 	
@@ -51,11 +55,16 @@ public class CartFacade extends AbstractFacade<Cart> {
 	
 	@Override
     public List<Cart> findAll() {
+		
+		logger.info("Cart.findAll");
+		
+//		logger.log(Level.INFO, "Cart.findAll");
+		
 //		System.out.println("searchParam.getSelectedTrademarks()."+searchParam.getProdtypesAsList());
 		
 		
 //		System.out.println("sqlSeason."+searchParam.getSeasonAsList());
-		System.out.println("Cart.findAll");
+//		System.out.println("Cart.findAll");
 		List<Cart> list = getEntityManager().createNativeQuery("SELECT \r\n" + 
         		"*  \r\n" + 
         		" FROM CART "+
@@ -63,6 +72,15 @@ public class CartFacade extends AbstractFacade<Cart> {
         		,Cart.class)
 				.setParameter("userId", userController.getSessionId())
 				.getResultList();
+		for(Cart p:list) {
+			p.getProd().getPictures().size();
+//			p.setColors(colorFacade.findAll());
+//			System.out.printf("Sizes %s    %s",p.getId(), p.getSizes().size());
+//			System.out.println("");
+//			System.out.printf("Colors %s    %s",p.getId(), p.getColors().size());
+//			System.out.println("");
+		}
+		
 		return list;
     }    
 

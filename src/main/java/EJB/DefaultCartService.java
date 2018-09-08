@@ -1,11 +1,11 @@
 package EJB;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import JSF.UserController;
@@ -17,6 +17,7 @@ import model.SearchResult;
 //@Stateful
 @Stateless
 public class DefaultCartService {
+	Logger logger = Logger.getLogger(DefaultCartService.class.getName());
 	private Cart current;
 	private List<Cart> items;
 
@@ -92,8 +93,6 @@ public class DefaultCartService {
 		current.setWhouseId(item.getWhouseId());
 		getFacade().create(current);
 		refreshCart();
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.addMessage("", new FacesMessage("Добавлен."));
 	}
 
 	public void del(Cart item) {
@@ -125,10 +124,12 @@ public class DefaultCartService {
 //	}
 
 	public Long getTotalCount() {
+		logger.log(Level.INFO, "totalAmount."+totalAmount);
 		return totalAmount;
 	}
 	
 	public Long getTotalPrice() {
+		logger.log(Level.INFO, "totalPrice."+totalPrice);
 		return totalPrice;
 	}
 	

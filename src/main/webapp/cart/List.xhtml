@@ -14,10 +14,27 @@
         <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                         template="/template/main.xhtml">
             <ui:define name="content">
-    
-	<div><h1>Корзина</h1></div>
+            <style>
+            	.cart-total{
+            		font-size:1.5rem;
 
-	
+            		margin:10px 0px;
+            	}
+            	
+            	.cart-total .totalValue{
+            		background-color: gray;
+            		border-radius:5px;
+            		color:white;
+            		margin-right:2px;
+            		padding:5px;
+            	}
+            	.cart-total tr{
+            	height:40px;
+            	}
+            </style>
+    
+
+	<div style="max-width:1200px;margin:auto;">
 	<h:form >
 		<p:panel rendered="#{cartController.items.size()==0}" style="text-align:center;">
 			<h2>Корзина пуста</h2>
@@ -25,6 +42,7 @@
 		<h:panelGroup rendered="#{cartController.items.size()!=0}">
 		<div class="container-fluid m-1">	
 			<div class="row align-items-center" style="border-bottom:1px solid gray;">
+				<div class="col"></div>
 				<div class="col">Наименование</div>
 				<div class="col">Размер</div>
 				<div class="col">Количество</div>
@@ -33,6 +51,8 @@
 			</div>		
 		<ui:repeat  value="#{cartController.items}" var="item">
 			<div class="row align-items-center" style="border-bottom:1px solid gray;">
+				<div class="col"><h:graphicImage url="/img/#{item.prod.pictures[0].picture}" width="150"> </h:graphicImage></div>
+			
 				<div class="col">#{item.prod.name}</div>
 				<div class="col">#{item.size.name}</div>
 				<div class="col">
@@ -56,13 +76,7 @@
 		</div>
 		
 		
-					<p:commandButton value="Заказать" 
-						action="#{orderProcessor.confirmCart()}" 
-						onclick="PF('statusDialog').show();"
-						oncomplete="PF('statusDialog').hide();"
-						update="@form growl cart" 
-						 />
-	<p:panel header="Контакты">
+	<p:panel header="Контакты" style="margin-top:10px;">
 		<h:panelGrid columns="2">
 		<h:outputLabel>Город</h:outputLabel>
 		<p:inputText value="#{orderProcessor.contact.city}" />
@@ -76,14 +90,63 @@
 		<h:outputLabel>Квартира</h:outputLabel>
 		<p:inputText value="#{orderProcessor.contact.flat}" />
 
+		<h:outputLabel>Телефон</h:outputLabel>
+		<p:inputText value="#{orderProcessor.contact.phone}" />
+
 		<h:outputLabel>Комментарий</h:outputLabel>
 		<p:inputTextarea value="#{orderProcessor.commentary}" cols="30" rows="5" >
 		</p:inputTextarea>
 		</h:panelGrid>
-	</p:panel>						 
+	</p:panel>
+	<div class="cart-total">
+	<table>
+		<tr>
+			<td>
+                  <h:outputText class="totalCaption" value="Итого:"/>
+			</td>
+			<td>
+                  <h:outputText class="totalValue" value="#{cartController.totalPrice}">
+                        <f:convertNumber type="number" groupingUsed="true" locale="ru_RU" />
+                  </h:outputText>
+                  <h:outputText class="totalValue" value=" руб."/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+                  <h:outputText class="totalCaption" value="Доставка:"/>
+			</td>
+			<td>
+                  <h:outputText class="totalValue" value="200">
+                        <f:convertNumber type="number" groupingUsed="true" locale="ru_RU" />
+                  </h:outputText>
+                  <h:outputText class="totalValue" value=" руб."/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+                  <h:outputText class="totalCaption" value="Итого по заказу:"/>
+			</td>
+			<td>
+                  <h:outputText class="totalValue" value="#{cartController.totalPrice+200}">
+                        <f:convertNumber type="number" groupingUsed="true" locale="ru_RU" />
+                  </h:outputText>
+                  <h:outputText class="totalValue" value=" руб."/>
+			</td>
+		</tr>
+	</table>
+	</div>
+		
+
+	<p:commandButton value="Заказать" 
+		action="#{orderProcessor.confirmCart()}" 
+		onclick="PF('statusDialog').show();"
+		oncomplete="PF('statusDialog').hide();"
+		update="@form growl cart" 
+		 />
+							 
 	</h:panelGroup>	
 	</h:form>
-
+	</div>
             </ui:define>
         </ui:composition>
     </h:body>

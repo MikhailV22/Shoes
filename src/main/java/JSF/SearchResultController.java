@@ -2,7 +2,7 @@
 
 package JSF;
 
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -27,7 +27,7 @@ import java.util.List;
 
 
 @Named("searchResultController")
-@SessionScoped
+@RequestScoped
 public class SearchResultController  implements Serializable {
 	/**
 	 * 

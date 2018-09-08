@@ -1,10 +1,12 @@
 	package JSF;
 
-	import javax.enterprise.context.SessionScoped;
+	import javax.enterprise.context.RequestScoped;
 //	import javax.faces.application.FacesMessage;
 //	import javax.faces.context.FacesContext;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
-	import java.io.Serializable;
+import java.io.Serializable;
 	import java.util.List;
 
 	import javax.ejb.EJB;
@@ -17,7 +19,7 @@
 
 
 	@Named("cartController")
-	@SessionScoped
+	@RequestScoped
 	public class CartController   implements Serializable {
 		private static final long serialVersionUID = 1L;
 
@@ -50,9 +52,10 @@
 			
 		}
 		
-		
 	    public void add(SearchResult item) {
 	    	cartService.add(item);
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage("", new FacesMessage("Добавлен."));
 		}
 
 		public void del(Cart item) {

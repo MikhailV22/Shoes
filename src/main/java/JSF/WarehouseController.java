@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.interceptor.Interceptors;
 
+import EJB.DefaultWarehouseService;
 import Interceprots.MyLogger;
 import JSF.util.JsfUtil;
 import SessionBean.WarehouseFacade;
@@ -21,36 +22,61 @@ import model.Warehouse;
 @SessionScoped
 public class WarehouseController implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	private Warehouse current;
-	
-	
-	public Warehouse getCurrent() {
-		if(current==null) {
-			current = new Warehouse();
-		}
-		return current;
-	}
 
-	public void setCurrent(Warehouse current) {
-		this.current = current;
-	}
+	private List<Warehouse> items;
+//	private Warehouse current;
+//	
+//	public Warehouse getCurrent() {
+//		if(current==null) {
+//			current = new Warehouse();
+//		}
+//		return current;
+//	}		
+//
+//	public void setCurrent(Warehouse current) {
+//		this.current = current;
+//	}
 
 
 	@EJB
-    private SessionBean.WarehouseFacade ejbFacade;	
+    private DefaultWarehouseService ejbService;	
 
-    private WarehouseFacade getFacade() {
-        return ejbFacade;
+
+    public DefaultWarehouseService getEjbService() {
+		return ejbService;
+	}
+
+    
+    
+    public List<Warehouse> getItems() {
+		return items;
+	}
+
+
+
+	public void setItems(List<Warehouse> items) {
+		this.items = items;
+	}
+
+
+
+	public void edit(Warehouse entity) {
+    	System.out.printf("id:%s   amout:%s",entity.getProd().getId(),entity.getAmount());
+    	System.out.println("");
+    	getEjbService().edit(entity);
     }
-
-    public List<Warehouse> getAll(){
+    
+	public List<Warehouse> getAll(){
     	System.out.println("----------------------getAll WAREHOUSES------------------");
-    	return getFacade().findAll();
+    	
+    	return getEjbService().findAll();
     }
     
 	public List<Warehouse> findByWhouseId(Long prodId,Long whouseId) {
-    	return getFacade().findByWhouseId(prodId,whouseId);
+		if (items == null) {
+			items = getEjbService().findByWhouseId(prodId,whouseId);
+		}
+    	return items;
 	}
 
 }

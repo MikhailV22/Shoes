@@ -53,13 +53,17 @@
                <f:selectItems value="#{genderController.getItemsAvailableSelectOne()}"/>
          </h:selectOneMenu>
 
+         
 		<h:outputLabel for="medicaltype">Medicaltype</h:outputLabel>
          <h:selectOneMenu id="medicaltype" 
          required="false"
+         converter="#{medicaltypeConverter}"
          
-                            value="#{prodController.current.medicaltype.id}" >
-               <f:selectItems value="#{medicaltypeController.getItemsAvailableSelectOne()}"/>
+                            value="#{prodController.current.medicaltype}" >
+               <f:selectItems value="#{medicaltypeController.getItemsAvailableSelectOne()}"
+               var="item" itemValue="#{item}" itemLabel="#{item.name}"/>
          </h:selectOneMenu>
+         
 		
 		<h:outputLabel for="season">Season</h:outputLabel>
          <h:selectOneMenu id="season" 
